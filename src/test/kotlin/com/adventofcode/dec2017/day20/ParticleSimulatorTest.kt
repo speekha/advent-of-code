@@ -1,8 +1,8 @@
 package com.adventofcode.dec2017.day20
 
-import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import java.io.File
 
 class ParticleSimulatorTest {
@@ -52,8 +52,8 @@ class ParticleSimulatorTest {
         var particle0 = Particle.parse(input1[0][0])
         var particle1 = Particle.parse(input1[0][1])
         for (i in 1 until input1.size) {
-            Assert.assertEquals("Step $i (0)", Particle.parse(input1[i][0]), particle0.computeNextPosition())
-            Assert.assertEquals("Step $i (1)", Particle.parse(input1[i][1]), particle1.computeNextPosition())
+            assertEquals(Particle.parse(input1[i][0]), particle0.computeNextPosition(), "Step $i (0)")
+            assertEquals(Particle.parse(input1[i][1]), particle1.computeNextPosition(), "Step $i (1)")
             particle0 = particle0.computeNextPosition()
             particle1 = particle1.computeNextPosition()
         }
@@ -64,8 +64,8 @@ class ParticleSimulatorTest {
         val particle0 = Particle.parse(input1[0][0])
         val particle1 = Particle.parse(input1[0][1])
         for (i in 1 until input1.size) {
-            assertEquals("Step $i (0)", Particle.parse(input1[i][0]), particle0.computePosition(i))
-            assertEquals("Step $i (1)", Particle.parse(input1[i][1]), particle1.computePosition(i))
+            assertEquals(Particle.parse(input1[i][0]), particle0.computePosition(i), "Step $i (0)")
+            assertEquals(Particle.parse(input1[i][1]), particle1.computePosition(i), "Step $i (1)")
         }
     }
 

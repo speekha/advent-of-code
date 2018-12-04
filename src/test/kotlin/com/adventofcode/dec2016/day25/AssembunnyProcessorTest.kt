@@ -1,7 +1,7 @@
 package com.adventofcode.dec2016.day25
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class AssembunnyProcessorTest {
 
@@ -46,7 +46,7 @@ class AssembunnyProcessorTest {
             processor.reset(a = it)
             processor.run()
         }
-        Assert.assertEquals(175, minStart)
+        Assertions.assertEquals(175, minStart)
     }
 
 }

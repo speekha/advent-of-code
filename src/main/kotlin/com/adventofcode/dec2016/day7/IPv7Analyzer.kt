@@ -41,7 +41,7 @@ class IPv7Analyzer {
 
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day7/input.txt").readLines()
     with(IPv7Analyzer()) {
         println("TLS addresses: ${countIPv7WithTLS(input)}")

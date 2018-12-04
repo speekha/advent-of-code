@@ -19,7 +19,7 @@ class PasswordValidator {
 }
 
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2017/day4/input.txt").readLines()
     println("Testing : ${input.size}")
     with(PasswordValidator()) {

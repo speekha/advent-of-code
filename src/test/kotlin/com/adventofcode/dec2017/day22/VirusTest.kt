@@ -1,7 +1,7 @@
 package com.adventofcode.dec2017.day22
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import java.io.File
 
 class VirusTester {
@@ -82,7 +82,7 @@ class VirusTester {
         val virus = Virus(input)
         (1..output.indices.last).forEach {
             virus.simpleInfectionBurst()
-            assertEquals("Error at step $it", output[it], virus.viewMap(9))
+            assertEquals(output[it], virus.viewMap(9), "Error at step $it")
         }
     }
 

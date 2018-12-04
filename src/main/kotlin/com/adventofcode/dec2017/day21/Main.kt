@@ -2,7 +2,7 @@ package com.adventofcode.dec2017.day21
 
 import java.io.File
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2017/day21/input.txt").readLines()
     with(FractalGenerator(input)) {
         for(i in 1..5) {

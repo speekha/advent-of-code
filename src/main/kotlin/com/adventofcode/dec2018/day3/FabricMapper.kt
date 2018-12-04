@@ -6,9 +6,9 @@ class FabricMapper(input: List<String>) {
 
     val claims = mapClaims(input)
     val width: Int
-        get() = claims.map { it.left + it.width + 1 }.max() ?: 0
+        get() = claims.map { it.left + it.width + 1 }.maxOrNull() ?: 0
     val height: Int
-        get() = claims.map { it.top + it.height + 1 }.max() ?: 0
+        get() = claims.map { it.top + it.height + 1 }.maxOrNull() ?: 0
     val map = Array(width) { Array(height) { 0 } }.also { map ->
         claims.forEach {
             (it.left until it.left + it.width).forEach { x ->
@@ -38,7 +38,7 @@ class FabricMapper(input: List<String>) {
     }.id
 }
 
-fun main(vararg args: String) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2018/day3/input.txt").readLines()
     val mapper = FabricMapper(input)
     println("Overlaps: ${mapper.overlap}")

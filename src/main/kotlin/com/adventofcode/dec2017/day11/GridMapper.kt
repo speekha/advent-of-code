@@ -12,7 +12,7 @@ class GridMapper {
 
     fun findFurthestPoint(input: String): Int {
         val path = parsePath(input)
-        return (0 .. path.size).map { computeDistance(path.subList(0, it)) }.max() ?: 0
+        return (0 .. path.size).map { computeDistance(path.subList(0, it)) }.maxOrNull() ?: 0
     }
 
     private fun computeDistance(path: List<Direction>): Int {

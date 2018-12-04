@@ -50,7 +50,7 @@ class IPRangeManager {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day20/input.txt").readLines()
     val ipManager = IPRangeManager()
     ipManager.addBlackListRange(input)

@@ -1,8 +1,8 @@
 package com.adventofcode.dec2016.day14
 
-import org.junit.Assert.*
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 class OneTimePadGeneratorTest {
 
@@ -56,7 +56,7 @@ class OneTimePadGeneratorTest {
         assertEquals(92, generator.generate(2))
     }
 
-    @Ignore
+    @Disabled
     @Test
     fun `22728 should produce the 64th key`() {
         val input = "abc"
@@ -64,7 +64,7 @@ class OneTimePadGeneratorTest {
         assertEquals(22728, generator.generate(64))
     }
 
-    @Ignore
+    @Disabled
     @Test
     fun `23769 should produce the 64th key`() {
         val input = "cuanljph"

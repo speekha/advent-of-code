@@ -44,7 +44,7 @@ class SectorAnalyzer {
             }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day4/input.txt").readLines()
     println("Testing : ${input.size}")
     with(SectorAnalyzer()) {

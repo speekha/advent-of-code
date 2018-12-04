@@ -32,7 +32,7 @@ class StreamParser {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2017/day9/input.txt").readLines()[0]
     with(StreamParser()) {
         println("Score: ${score(input)}")

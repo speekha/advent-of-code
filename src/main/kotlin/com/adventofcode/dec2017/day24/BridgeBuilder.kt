@@ -28,7 +28,7 @@ class BridgeBuilder(input: List<String>) {
         } else {
             compatibleComponents.map {
                 findBestBridge(availables - it, getOtherEnd(it, start), comp) + start
-            }.maxWith(comp) ?: emptyList()
+            }.maxWithOrNull(comp) ?: emptyList()
         }
     }
 

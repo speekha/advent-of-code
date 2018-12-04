@@ -26,7 +26,7 @@ class MemoryManager {
     }
 
     fun redistributeMemory(input: IntArray): IntArray {
-        val max = input.max() ?: 0
+        val max = input.maxOrNull() ?: 0
         val memBank = input.indexOf(max)
         val memory = IntArray(input.size) { if (it == memBank) 0 else input[it] }
         return memory.indices.map {
@@ -44,7 +44,7 @@ class MemoryManager {
 }
 
 
-fun main(args: Array<String>) {
+fun main() {
     val input = "14 0 15 12 11 11 3 5 1 6 8 4 9 1 8 4".split(" ").map { it.toInt() }.toIntArray()
     with(MemoryManager()) {
         println("Infinite loop after ${redistributeMemoryCompletely(input)} cycles")

@@ -60,7 +60,7 @@ class PasswordGenerator {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = "ffykfhsq"
     with(PasswordGenerator()) {
         //println("Password: ${generatePassword(input)}")

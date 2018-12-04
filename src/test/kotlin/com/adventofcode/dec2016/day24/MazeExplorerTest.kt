@@ -1,7 +1,7 @@
 package com.adventofcode.dec2016.day24
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class MazeExplorerTest {
 
@@ -15,7 +15,7 @@ class MazeExplorerTest {
     @Test
     fun `should find shortest path`() {
         val explorer = MazeExplorer(input)
-        Assert.assertEquals(14, explorer.findShortestRoute())
+        Assertions.assertEquals(14, explorer.findShortestRoute())
     }
 
 //    @Test
@@ -23,7 +23,7 @@ class MazeExplorerTest {
 //        val distances = Array<Array<Int>>
 //        val explorer = MazeExplorer(input)
 //
-//        Assert.assertEquals(14, explorer.findShortestRoute())
+//        Assertions.assertEquals(14, explorer.findShortestRoute())
 //
 //    }
 

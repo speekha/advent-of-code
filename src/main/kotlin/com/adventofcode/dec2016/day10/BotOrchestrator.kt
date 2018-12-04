@@ -47,16 +47,16 @@ class BotOrchestrator(input: List<String>) {
                 .forEach {
                     bots[it].lowOutput?.let { i ->
                         if (bots[it].lowOutputType == OutputType.bot) {
-                            bots[i].inputs += bots[it].inputs.min()!!
+                            bots[i].inputs += bots[it].inputs.minOrNull()!!
                         } else {
-                            outputs[i] = bots[it].inputs.min()!!
+                            outputs[i] = bots[it].inputs.minOrNull()!!
                         }
                     }
                     bots[it].highOutput?.let { i ->
                         if (bots[it].highOutputType == OutputType.bot) {
-                            bots[i].inputs += bots[it].inputs.max()!!
+                            bots[i].inputs += bots[it].inputs.maxOrNull()!!
                         } else {
-                            outputs[i] = bots[it].inputs.max()!!
+                            outputs[i] = bots[it].inputs.maxOrNull()!!
                         }
                     }
                     flags[it] = true
@@ -111,7 +111,7 @@ class BotOrchestrator(input: List<String>) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day10/input.txt").readLines()
     with(BotOrchestrator(input)) {
         initFlows()

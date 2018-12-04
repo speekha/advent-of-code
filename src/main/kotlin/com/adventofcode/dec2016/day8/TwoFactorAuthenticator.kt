@@ -69,7 +69,7 @@ class TwoFactorAuthenticator(val width: Int, val height: Int) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day8/input.txt").readLines()
     with(TwoFactorAuthenticator(50, 6)) {
         parseInstructions(input)

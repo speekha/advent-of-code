@@ -4,8 +4,8 @@ class MemoryErrorChecker {
 
     fun calculateRowChecksum(input: String): Int {
         val values = input.split(" ", "\t").map { it.toInt() }
-        val max = values.max() ?: 0
-        val min = values.min() ?: 0
+        val max = values.maxOrNull() ?: 0
+        val min = values.minOrNull() ?: 0
         return max - min
     }
 
@@ -30,7 +30,7 @@ class MemoryErrorChecker {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = "3751\t3769\t2769\t2039\t2794\t240\t3579\t1228\t4291\t220\t324\t3960\t211\t1346\t237\t1586\n" +
             "550\t589\t538\t110\t167\t567\t99\t203\t524\t288\t500\t111\t118\t185\t505\t74\n" +
             "2127\t1904\t199\t221\t1201\t250\t1119\t377\t1633\t1801\t2011\t1794\t394\t238\t206\t680\n" +

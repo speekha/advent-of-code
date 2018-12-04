@@ -1,7 +1,7 @@
 package com.adventofcode.dec2017.day5
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import java.io.File
 
 class InstructionProcessorTest {

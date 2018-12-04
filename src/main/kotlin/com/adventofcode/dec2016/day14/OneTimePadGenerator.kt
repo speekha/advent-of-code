@@ -59,7 +59,7 @@ class OneTimePadGenerator(val salt: String, val hashFunction: (String) -> String
 
 }
 
-fun main(args: Array<String>) = time {
+fun main() = time {
     val input = "cuanljph"
     val generator = OneTimePadGenerator(input, HashGenerator()::simpleKey)
     println("64th key for: ${generator.generate(70)}")

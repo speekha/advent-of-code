@@ -1,8 +1,7 @@
 package com.adventofcode.dec2017.day15
 
-import org.junit.Assert
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class GeneratorSequencerTest {
 
@@ -39,7 +38,7 @@ class GeneratorSequencerTest {
     fun `generator A should match output`() {
         val sequencerA = GeneratorSequencer(65, 16807)
         inputA.forEach {
-            Assert.assertEquals(it.toLong(), sequencerA.computeNextValue())
+            Assertions.assertEquals(it.toLong(), sequencerA.computeNextValue())
         }
     }
 
@@ -47,7 +46,7 @@ class GeneratorSequencerTest {
     fun `generator A should match binary output`() {
         val sequencerA = GeneratorSequencer(65, 16807)
         binaryInputA.forEach {
-            Assert.assertEquals(it, sequencerA.computeNextBinaryValue())
+            Assertions.assertEquals(it, sequencerA.computeNextBinaryValue())
         }
     }
 
@@ -55,7 +54,7 @@ class GeneratorSequencerTest {
     fun `generator B should match output`() {
         val sequencerB = GeneratorSequencer(8921, 48271)
         inputB.forEach {
-            Assert.assertEquals(it.toLong(), sequencerB.computeNextValue())
+            Assertions.assertEquals(it.toLong(), sequencerB.computeNextValue())
         }
     }
 
@@ -63,7 +62,7 @@ class GeneratorSequencerTest {
     fun `generator B should match binary output`() {
         val sequencerB = GeneratorSequencer(8921, 48271)
         binaryInputB.forEach {
-            Assert.assertEquals(it, sequencerB.computeNextBinaryValue())
+            Assertions.assertEquals(it, sequencerB.computeNextBinaryValue())
         }
     }
 
@@ -87,7 +86,7 @@ class GeneratorSequencerTest {
     fun `new generator A should match binary output`() {
         val sequencerA = GeneratorSequencer(65, 16807, 2)
         binaryInputA4.forEach {
-            Assert.assertEquals(it, sequencerA.computeNextBinaryValue())
+            Assertions.assertEquals(it, sequencerA.computeNextBinaryValue())
         }
     }
 
@@ -95,7 +94,7 @@ class GeneratorSequencerTest {
     fun `new generator B should match binary output`() {
         val sequencerB = GeneratorSequencer(8921, 48271, 3)
         binaryInputB8.forEach {
-            Assert.assertEquals(it, sequencerB.computeNextBinaryValue())
+            Assertions.assertEquals(it, sequencerB.computeNextBinaryValue())
         }
     }
 }

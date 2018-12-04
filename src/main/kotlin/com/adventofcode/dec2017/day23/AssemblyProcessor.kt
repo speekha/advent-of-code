@@ -19,7 +19,7 @@ class AssemblyProcessor(input: List<String>, vararg initValues: Pair<String, Lon
     }
 
     fun updateCounter(instr: Instruction) {
-        counter[instr::class.simpleName ?: ""] = counter.getOrDefault(instr::class.simpleName, 0) + 1
+        counter[instr::class.simpleName ?: ""] = counter.getOrDefault(instr::class.simpleName?:error("Unknown instruction class: ${instr::class}"), 0) + 1
     }
 
     fun getRegister(register: String): Long = if (register.length == 1 && register[0] in 'a'..'z') {

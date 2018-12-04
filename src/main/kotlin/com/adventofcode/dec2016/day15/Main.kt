@@ -2,7 +2,7 @@ package com.adventofcode.dec2016.day15
 
 import java.io.File
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day15/input.txt").readLines()
     var sculpture = parseFile(input)
     println("Drop capsule at: ${sculpture.calculateDropTime()}s")

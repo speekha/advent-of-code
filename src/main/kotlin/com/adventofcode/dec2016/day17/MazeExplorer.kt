@@ -38,7 +38,7 @@ class MazeExplorer(val pass: String) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val mazeExplorer = MazeExplorer("gdjjyniy")
     println("Shortest path is: ${mazeExplorer.findShortestPath()}")
     println("Longest path is: ${mazeExplorer.findLongestPath()}")

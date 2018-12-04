@@ -29,7 +29,7 @@ class TriangleValidator {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day3/input.txt").readLines()
     println("Testing : ${input.size}")
     with(TriangleValidator()) {

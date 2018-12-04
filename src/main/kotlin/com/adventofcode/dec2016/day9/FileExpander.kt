@@ -57,7 +57,7 @@ class FileExpander(input: String) {
 
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day9/input.txt").readLines().joinToString("")
     with(FileExpander(input)) {
         println("Decompressed data length: ${decompress().length}")

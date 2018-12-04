@@ -36,7 +36,7 @@ class ProgramPile(input: List<String> = emptyList()) {
 
     tailrec fun findUnbalancedProgram(root: Node): Node {
         val subtowerWeights = root.children.groupBy { node(it).totalWeight() }
-        val unbalanced = subtowerWeights.minBy { it.value.size }?.value?.first() ?: ""
+        val unbalanced = subtowerWeights.minByOrNull { it.value.size }?.value?.first() ?: ""
         val node = node(unbalanced)
         return if (node.areChildrenBalanced()) node else findUnbalancedProgram(node)
     }
@@ -79,7 +79,7 @@ class ProgramPile(input: List<String> = emptyList()) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2017/day7/input.txt").readLines()
     with(ProgramPile(input)) {
         println("Root: ${findRoot().name}")

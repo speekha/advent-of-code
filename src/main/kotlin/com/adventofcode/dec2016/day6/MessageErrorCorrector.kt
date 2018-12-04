@@ -4,11 +4,11 @@ import java.io.File
 
 class MessageErrorCorrector {
     fun restoreMessage(input: List<String>): String = restoreMessageWithCriteria(input) {
-        groupBy { it }.maxBy { it.value.size }?.key
+        groupBy { it }.maxByOrNull { it.value.size }?.key
     }
 
     fun restoreMessageWithObfuscation(input: List<String>): String = restoreMessageWithCriteria(input) {
-        groupBy { it }.minBy { it.value.size }?.key
+        groupBy { it }.minByOrNull { it.value.size }?.key
     }
 
     private fun restoreMessageWithCriteria(input: List<String>, selector: List<Char>.() -> Char?) =
@@ -20,7 +20,7 @@ class MessageErrorCorrector {
                     .joinToString("")
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day6/input.txt").readLines()
     println("Testing : ${input.size}")
     with(MessageErrorCorrector()) {

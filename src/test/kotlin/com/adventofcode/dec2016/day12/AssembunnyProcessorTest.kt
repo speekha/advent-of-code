@@ -1,7 +1,8 @@
 package com.adventofcode.dec2016.day12
 
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class AssembunnyProcessorTest {
 
@@ -16,7 +17,7 @@ class AssembunnyProcessorTest {
     fun `should process instructions`() {
         with(AssembunnyProcessor()) {
             process(input)
-            Assert.assertEquals(42, registers["a"])
+            assertEquals(42, registers["a"])
         }
     }
 }

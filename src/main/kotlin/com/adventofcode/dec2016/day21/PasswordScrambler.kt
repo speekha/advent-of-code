@@ -36,7 +36,7 @@ class PasswordScrambler(val instructions: List<Instruction>) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2016/day21/input.txt").readLines()
     val scrambler = PasswordScrambler.parse(input)
     val scrambled = scrambler.scramble("abcdefgh")

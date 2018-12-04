@@ -68,7 +68,7 @@ class AssembunnyProcessor(
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = listOf(
             "cpy a b",
             "dec b",

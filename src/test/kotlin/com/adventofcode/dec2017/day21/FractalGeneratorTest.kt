@@ -1,8 +1,8 @@
 package com.adventofcode.dec2017.day21
 
-import org.junit.Assert
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import java.io.File
 
 class FractalGeneratorTest {
@@ -17,14 +17,14 @@ class FractalGeneratorTest {
                 booleanArrayOf(false, false, true),
                 booleanArrayOf(true, true, true)
         )
-        Assert.assertArrayEquals(array, FractalGenerator.parse(".#./..#/###"))
+        Assertions.assertArrayEquals(array, FractalGenerator.parse(".#./..#/###"))
     }
 
     @Test
     fun `initial pattern should match`() {
         val generator = FractalGenerator(emptyList())
         val pattern = Pattern(".#./..#/###", FractalGenerator.parse((".#./..#/###")))
-        Assert.assertTrue(pattern.match(generator.pixels))
+        Assertions.assertTrue(pattern.match(generator.pixels))
     }
 
     @Test

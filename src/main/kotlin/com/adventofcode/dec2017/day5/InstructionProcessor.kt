@@ -34,7 +34,7 @@ class InstructionProcessor {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2017/day5/input.txt").readLines()
     with(InstructionProcessor()) {
         println("Steps to exit: ${countStepsToExit(input)}")

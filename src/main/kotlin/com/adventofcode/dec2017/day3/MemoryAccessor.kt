@@ -23,10 +23,10 @@ class MemoryAccessor {
     fun computeDistance(start: Position, end: Position) = abs(start.x - end.x) + abs(start.y - end.y)
 }
 
-fun main(args: Array<String>) {
+fun main() {
     with(MemoryAccessor()) {
         val input = 368078
         println("Distance for $input: ${computeDistance(input)}")
-        println("Next input for $input: ${fillSquares(input)}")
+        println("Next pattern for $input: ${fillSquares(input)}")
     }
 }

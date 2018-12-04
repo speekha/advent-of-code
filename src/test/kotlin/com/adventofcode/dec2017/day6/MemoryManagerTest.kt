@@ -1,16 +1,16 @@
 package com.adventofcode.dec2017.day6
 
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class MemoryManagerTest {
 
     @Test
     fun `test redistribution`() {
-        assertEquals("0", 1, MemoryManager().reallocationRemainder(0, 4, 2 to 7))
-        assertEquals("1", 1, MemoryManager().reallocationRemainder(1, 4, 2 to 7))
-        assertEquals("2", 0, MemoryManager().reallocationRemainder(2, 4, 2 to 7))
-        assertEquals("3", 1, MemoryManager().reallocationRemainder(3, 4, 2 to 7))
+        assertEquals(1, MemoryManager().reallocationRemainder(0, 4, 2 to 7), "0")
+        assertEquals(1, MemoryManager().reallocationRemainder(1, 4, 2 to 7), "1")
+        assertEquals(0, MemoryManager().reallocationRemainder(2, 4, 2 to 7), "2")
+        assertEquals(1, MemoryManager().reallocationRemainder(3, 4, 2 to 7), "3")
     }
 
     @Test

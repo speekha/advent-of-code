@@ -28,7 +28,7 @@ class WhiteElephantGame(val elfCount: Int) {
 
 }
 
-fun main(args: Array<String>) {
+fun main() {
     println("Winner is: ${WhiteElephantGame(3017957).computeWinner()}")
     println("Second Winner is: ${WhiteElephantGame(3017957).computeWinner(false)}")
 }

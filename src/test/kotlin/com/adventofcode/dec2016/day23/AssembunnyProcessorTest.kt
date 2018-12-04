@@ -1,8 +1,8 @@
 package com.adventofcode.dec2016.day23
 
-import org.junit.Assert
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 class AssembunnyProcessorTest {
 
@@ -46,7 +46,7 @@ class AssembunnyProcessorTest {
     fun `should process instructions`() {
         with(AssembunnyProcessor(input = input)) {
             run()
-            Assert.assertEquals(3, registers["a"])
+            Assertions.assertEquals(3, registers["a"])
         }
     }
 
@@ -54,16 +54,16 @@ class AssembunnyProcessorTest {
     fun `should process actual instructions`() {
         with(AssembunnyProcessor(a = 7, input = actualInput)) {
             run()
-            Assert.assertEquals(13776, registers["a"])
+            Assertions.assertEquals(13776, registers["a"])
         }
     }
 
     @Test
-    @Ignore
+    @Disabled
     fun `should process actual instructions with second input`() {
         with(AssembunnyProcessor(a = 12, input = actualInput)) {
             run()
-            Assert.assertEquals(479010336, registers["a"])
+            Assertions.assertEquals(479010336, registers["a"])
         }
     }
 }

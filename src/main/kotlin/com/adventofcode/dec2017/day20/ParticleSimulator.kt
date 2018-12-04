@@ -6,7 +6,7 @@ class ParticleSimulator(input: List<String>) {
 
     var particles = input.map { Particle.parse(it) }
 
-    fun findParticleWithBiggestAcceleration() = particles.indices.minBy {
+    fun findParticleWithBiggestAcceleration() = particles.indices.minByOrNull {
         abs(particles[it].x.acceleration) + abs(particles[it].y.acceleration) + abs(particles[it].z.acceleration)
     } ?: -1
 

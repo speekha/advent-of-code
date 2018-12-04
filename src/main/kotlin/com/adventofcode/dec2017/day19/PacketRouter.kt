@@ -14,7 +14,7 @@ class PacketRouter(input: List<String>) {
     }
 
     private fun initNetwork(input: List<String>): List<String> {
-        val len = input.maxBy { it.length }?.length ?: 0
+        val len = input.maxByOrNull { it.length }?.length ?: 0
         return input.map { it.padEnd(len, ' ') }
     }
 

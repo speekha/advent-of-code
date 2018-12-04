@@ -1,8 +1,7 @@
 package com.adventofcode.dec2016.day10
 
-import org.junit.Assert
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class BotOrchestratorTest {
 
@@ -15,7 +14,7 @@ class BotOrchestratorTest {
 
     @Test
     fun `should have 3 bots`() {
-        Assert.assertEquals(3, BotOrchestrator(input).bots.size)
+        assertEquals(3, BotOrchestrator(input).bots.size)
     }
 
     @Test
@@ -24,9 +23,9 @@ class BotOrchestratorTest {
         sched.initFlows()
         val bots = sched.bots
 
-        Assert.assertEquals(setOf(2, 5), bots[2].inputs)
-        Assert.assertEquals(1, bots[2].lowOutput)
-        Assert.assertEquals(0, bots[2].highOutput)
+        assertEquals(setOf(2, 5), bots[2].inputs)
+        assertEquals(1, bots[2].lowOutput)
+        assertEquals(0, bots[2].highOutput)
     }
 
     @Test
@@ -34,7 +33,7 @@ class BotOrchestratorTest {
         val sched = BotOrchestrator(input)
         sched.initFlows()
         println(sched.bots.toList())
-        Assert.assertEquals(2, sched.findComparator(2, 5).id)
+        assertEquals(2, sched.findComparator(2, 5).id)
     }
 
     @Test
@@ -42,8 +41,8 @@ class BotOrchestratorTest {
         val sched = BotOrchestrator(input)
         sched.initFlows()
         println(sched.bots.toList())
-        Assert.assertEquals(1, sched.findComparator(2, 3).id)
-        Assert.assertEquals(0, sched.findComparator(3, 5).id)
+        assertEquals(1, sched.findComparator(2, 3).id)
+        assertEquals(0, sched.findComparator(3, 5).id)
     }
 
     @Test
@@ -51,7 +50,7 @@ class BotOrchestratorTest {
         val sched = BotOrchestrator(input)
         sched.initFlows()
         println(sched.bots.toList())
-        Assert.assertEquals(2, sched.computeOutput(1))
+        assertEquals(2, sched.computeOutput(1))
     }
 
     @Test
@@ -59,7 +58,7 @@ class BotOrchestratorTest {
         val sched = BotOrchestrator(input)
         sched.initFlows()
         println(sched.bots.toList())
-        Assert.assertEquals(5, sched.computeOutput(0))
-        Assert.assertEquals(3, sched.computeOutput(2))
+        assertEquals(5, sched.computeOutput(0))
+        assertEquals(3, sched.computeOutput(2))
     }
 }

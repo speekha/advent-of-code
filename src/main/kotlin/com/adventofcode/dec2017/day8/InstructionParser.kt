@@ -16,7 +16,7 @@ class InstructionParser {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = File("src/main/kotlin/com/adventofcode/dec2017/day8/input.txt").readLines()
     val parser = InstructionParser()
     with(CPU()) {

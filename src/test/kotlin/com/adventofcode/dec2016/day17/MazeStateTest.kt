@@ -1,8 +1,8 @@
 package com.adventofcode.dec2016.day17
 
 import com.adventofcode.dec2016.day17.Direction.*
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class MazeStateTest {
 

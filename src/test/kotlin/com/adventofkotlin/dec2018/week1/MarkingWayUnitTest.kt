@@ -1,8 +1,8 @@
 package com.adventofkotlin.dec2018.week1
 
 import com.adventofkotlin.dec2018.MarkPath
-import junit.framework.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class MarkingWayOnMapTests {
 

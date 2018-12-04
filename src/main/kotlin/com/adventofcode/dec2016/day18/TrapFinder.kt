@@ -14,7 +14,7 @@ class TrapFinder {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val input = "^..^^.^^^..^^.^...^^^^^....^.^..^^^.^.^.^^...^.^.^.^.^^.....^.^^.^.^.^.^.^.^^..^^^^^...^.....^....^."
     val finder = TrapFinder()
     println("Safe tiles: ${finder.countSafeTiles(input, 40)}")

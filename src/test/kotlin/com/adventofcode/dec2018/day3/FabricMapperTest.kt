@@ -1,11 +1,11 @@
 package com.adventofcode.dec2018.day3
 
-import org.junit.Assert.*
-import org.junit.Test
-import java.io.File
+import com.adventofcode.readInputAsList
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class FabricMapperTest {
-
 
     val input = listOf(
             "#1 @ 1,3: 4x4",
@@ -37,7 +37,7 @@ class FabricMapperTest {
 
     @Test
     fun `should count actual overlaps`() {
-        val input = File("src/main/kotlin/com/adventofcode/dec2018/day3/input.txt").readLines()
+        val input = readInputAsList()
         val mapper = FabricMapper(input)
         assertEquals(111630, mapper.overlap)
     }
@@ -55,7 +55,7 @@ class FabricMapperTest {
 
     @Test
     fun `should find actual non-overlapping claim`() {
-        val input = File("src/main/kotlin/com/adventofcode/dec2018/day3/input.txt").readLines()
+        val input = readInputAsList()
         val mapper = FabricMapper(input)
         assertEquals("#724", mapper.findNonOverLappingClaim())
     }

@@ -30,7 +30,7 @@ class RandomDataGenerator(
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val generator = RandomDataGenerator("00101000101111010")
     println("Checksum = " + generator.fillDrive(272))
     println("Checksum = " + generator.fillDrive(35651584))

@@ -1,9 +1,8 @@
 package com.adventofcode.dec2017.day14
 
-import org.hamcrest.CoreMatchers
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 class DefragMonitorTest {
 
@@ -43,7 +42,7 @@ class DefragMonitorTest {
         val defrag = DefragMonitor(input)
         output.indices.forEach {
             val hash = defrag.displayRow(it).map { if (it == '1') '#' else '.' }.joinToString("")
-            assertThat("Line #$it", hash, CoreMatchers.startsWith(output[it]))
+            assertTrue(hash.startsWith(output[it]), "Line #$it")
         }
     }
 

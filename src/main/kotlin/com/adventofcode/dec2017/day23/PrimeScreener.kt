@@ -23,7 +23,7 @@ class PrimeScreener(var a: Int = 0,
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     with(PrimeScreener(a = 1)) {
         println("h = ${execute()}")
     }

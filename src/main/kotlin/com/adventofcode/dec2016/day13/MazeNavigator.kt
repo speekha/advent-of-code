@@ -86,7 +86,7 @@ class MazeNavigator(val offset: Int) {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     with(MazeNavigator(1358)) {
         println("Shortest path: ${findDistance(1 to 1, 31 to 39)}")
         println("Cells within 50 steps: ${countReachable(1 to 1, 50)}")

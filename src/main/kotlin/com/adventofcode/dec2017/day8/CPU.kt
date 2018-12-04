@@ -45,7 +45,7 @@ class CPU(
         }
     }
 
-    fun getHighestRegister() = registers.maxBy { it.value } ?: error("Not ready")
+    fun getHighestRegister() = registers.maxByOrNull { it.value } ?: error("Not ready")
 
     fun getRange() = min..max
 }

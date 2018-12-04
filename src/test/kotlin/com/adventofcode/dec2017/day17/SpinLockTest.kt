@@ -1,8 +1,8 @@
 package com.adventofcode.dec2017.day17
 
-import org.junit.Assert.*
-import org.junit.Ignore
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 
 class SpinLockTest {
     val input = listOf(
@@ -65,7 +65,7 @@ class SpinLockTest {
         assertEquals(9, SpinLock(3).getPostZeroEntry(9))
     }
 
-    @Ignore
+    @Disabled
     @Test
     fun `should be 10150888`() {
         assertEquals(10150888, SpinLock(394).getPostZeroEntry(50000000))
