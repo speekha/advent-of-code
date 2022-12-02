@@ -9,11 +9,9 @@ class CalorieCounter {
             }
         }
 
-    fun findElfWithMostCalories(input: String): Int {
-        return parseCalories(input).maxOf { it }
-    }
+    fun findElfWithMostCalories(input: String): Int =
+        parseCalories(input).maxOf { it }
 
-    fun findElvesWithMostCalories(input: String): Int {
-        return parseCalories(input).sortedDescending().take(3).sum()
-    }
+    fun findElvesWithMostCalories(input: String): Int =
+        parseCalories(input).sortedDescending().take(3).sum()
 }
