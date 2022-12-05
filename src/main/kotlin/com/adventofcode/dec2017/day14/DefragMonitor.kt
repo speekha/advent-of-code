@@ -5,7 +5,7 @@ import java.util.*
 
 class DefragMonitor(val input: String) {
 
-    fun countUsedSquares(): Int = (0..127).map { displayRow(it) }.sumBy { it.count { it == '1' } }
+    fun countUsedSquares(): Int = (0..127).map { displayRow(it) }.sumOf { it.count { it == '1' } }
 
     fun countRegions(): Int {
         return countRegions((0..127).map {
@@ -32,8 +32,8 @@ class DefragMonitor(val input: String) {
     }
 
     private tailrec fun findFirstUsedSquare(
-            rows: Array<BooleanArray>,
-            x: Int = -1, y: Int = -1
+        rows: Array<BooleanArray>,
+        x: Int = -1, y: Int = -1
     ): Pair<Int, Int> = if (x != -1 || y >= rows.size - 1) {
         x to y
     } else {

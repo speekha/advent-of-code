@@ -4,19 +4,19 @@ import com.adventofcode.dec2019.intCode.intCodeRunner
 import kotlinx.coroutines.channels.Channel
 
 class BeamController(
-        private val program: String
+    private val program: String
 ) {
     private val coords = Channel<Long>(10)
 
     suspend fun countAffectedPoints(xRange: IntRange, yRange: IntRange): Int =
-            yRange.sumBy { y ->
-                print("$y: ")
-                xRange.sumBy { x ->
-                    computePoint(x, y)
-                }.also {
-                    println()
-                }
+        yRange.sumOf { y ->
+            print("$y: ")
+            xRange.sumOf { x ->
+                computePoint(x, y)
+            }.also {
+                println()
             }
+        }
 
     internal suspend fun computePoint(x: Int, y: Int): Int {
         val impact = Channel<Long>(10)
@@ -35,11 +35,11 @@ class BeamController(
     }
 
     suspend fun findMinX(row: Int, xMin: Int = 0, compute: suspend (Int, Int) -> Int) =
-            generateSequence(xMin) { it + 1 }
-                    .first {
-                        val computePoint = compute(it, row)
-                        computePoint == 1
-                    }
+        generateSequence(xMin) { it + 1 }
+            .first {
+                val computePoint = compute(it, row)
+                computePoint == 1
+            }
 
     suspend fun findClosestSquare(size: Int, yRange: IntRange, compute: suspend (Int, Int) -> Int): Pair<Int, Int> {
         var xMin = 0

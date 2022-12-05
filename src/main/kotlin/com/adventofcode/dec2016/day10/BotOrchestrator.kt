@@ -9,7 +9,7 @@ class BotOrchestrator(input: List<String>) {
 
     val bots = Array(computeBotNumber()) { ProcessingBot(it) }
 
-    val outputs = IntArray(computeOutputNumber()) {-1}
+    val outputs = IntArray(computeOutputNumber()) { -1 }
 
     val flags = BooleanArray(bots.size)
 
@@ -23,6 +23,8 @@ class BotOrchestrator(input: List<String>) {
                     bots[it.source].highOutput = it.highOutput
                     bots[it.source].highOutputType = it.highOutputType
                 }
+
+                else -> {}
             }
         }
     }
@@ -43,24 +45,24 @@ class BotOrchestrator(input: List<String>) {
 
     private fun processTransitions() {
         bots.indices
-                .filter { !flags[it] && bots[it].inputs.size == 2 }
-                .forEach {
-                    bots[it].lowOutput?.let { i ->
-                        if (bots[it].lowOutputType == OutputType.bot) {
-                            bots[i].inputs += bots[it].inputs.minOrNull()!!
-                        } else {
-                            outputs[i] = bots[it].inputs.minOrNull()!!
-                        }
+            .filter { !flags[it] && bots[it].inputs.size == 2 }
+            .forEach {
+                bots[it].lowOutput?.let { i ->
+                    if (bots[it].lowOutputType == OutputType.bot) {
+                        bots[i].inputs += bots[it].inputs.minOrNull()!!
+                    } else {
+                        outputs[i] = bots[it].inputs.minOrNull()!!
                     }
-                    bots[it].highOutput?.let { i ->
-                        if (bots[it].highOutputType == OutputType.bot) {
-                            bots[i].inputs += bots[it].inputs.maxOrNull()!!
-                        } else {
-                            outputs[i] = bots[it].inputs.maxOrNull()!!
-                        }
-                    }
-                    flags[it] = true
                 }
+                bots[it].highOutput?.let { i ->
+                    if (bots[it].highOutputType == OutputType.bot) {
+                        bots[i].inputs += bots[it].inputs.maxOrNull()!!
+                    } else {
+                        outputs[i] = bots[it].inputs.maxOrNull()!!
+                    }
+                }
+                flags[it] = true
+            }
     }
 
     private fun computeBotNumber(): Int {
@@ -76,6 +78,8 @@ class BotOrchestrator(input: List<String>) {
                         max = max(max, it.highOutput)
                     }
                 }
+
+                else -> {}
             }
         }
         return max + 1

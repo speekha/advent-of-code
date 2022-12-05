@@ -33,9 +33,9 @@ class SeatManager(input: List<String>) {
         seats = next
     }
 
-    fun countOccupiedSeats() = seats.indices.sumBy { row ->
-        seats[row].indices.sumBy { col ->
-            if (seats[row][col] == Tile.OCCUPIED) 1 else 0
+    fun countOccupiedSeats(): Long = seats.indices.sumOf { row ->
+        seats[row].indices.sumOf { col ->
+            if (seats[row][col] == Tile.OCCUPIED) 1L else 0L
         }
     }
 
@@ -67,12 +67,12 @@ class SeatManager(input: List<String>) {
     }
 
     private fun countOccupiedNeighbors(pos: GridPosition, extended: Boolean): Int = if (extended) {
-        Neighbor.values().sumBy {
+        Neighbor.values().sumOf<Neighbor> {
             var neighbor = pos + it
             while (neighbor in seats && seats[neighbor] == Tile.FLOOR) {
                 neighbor += it
             }
-            if (neighbor in seats && seats[neighbor] == Tile.OCCUPIED) 1 else 0
+            (if (neighbor in seats && seats[neighbor] == Tile.OCCUPIED) 1 else 0) as Int
         }
     } else {
         seats.foldNeighbors(pos, 0) { acc, tile ->

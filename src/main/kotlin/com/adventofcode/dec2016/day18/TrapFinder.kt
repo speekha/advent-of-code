@@ -6,7 +6,7 @@ class TrapFinder {
 
     fun countSafeTiles(input: String, rows: Int): Int {
         var current = getRow(input)
-        return (1..rows).sumBy {
+        return (1..rows).sumOf {
             val safeTiles = current.safeTiles()
             current = current.nextRow()
             safeTiles

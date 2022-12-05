@@ -17,6 +17,7 @@ class TwoFactorAuthenticator(val width: Int, val height: Int) {
                 val (x, y, _) = split[1].split("x")
                 drawRect(x.toInt(), y.toInt())
             }
+
             "rotate" -> {
                 when (split[1]) {
                     "column" -> rotateColumn(split[2].substring(2).toInt(), split[4].toInt())
@@ -57,7 +58,7 @@ class TwoFactorAuthenticator(val width: Int, val height: Int) {
         }
     }
 
-    fun countPixels() = screen.sumBy { it.count { it } }
+    fun countPixels() = screen.sumOf { it.count { it } }
 
     fun printDisplay() {
         (0 until height).forEach { y ->

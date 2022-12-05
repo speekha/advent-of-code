@@ -3,9 +3,9 @@ package com.adventofcode.dec2017.day21
 class FractalGenerator(input: List<String>) {
 
     var pixels = arrayOf(
-            booleanArrayOf(false, true, false),
-            booleanArrayOf(false, false, true),
-            booleanArrayOf(true, true, true)
+        booleanArrayOf(false, true, false),
+        booleanArrayOf(false, false, true),
+        booleanArrayOf(true, true, true)
     )
 
     val transformations = initTransformations(input)
@@ -51,27 +51,28 @@ class FractalGenerator(input: List<String>) {
         }
 
         private fun initTransformations(input: List<String>) = input.asSequence()
-                .map {
-                    val (pattern, output) = it.split(" => ")
-                    Pattern(pattern, parse(output))
-                }
-                .flatMap { pattern -> flipPattern(pattern) }
-                .map { it.input to it }
-                .associate { it }
+            .map {
+                val (pattern, output) = it.split(" => ")
+                Pattern(pattern, parse(output))
+            }
+            .flatMap { pattern -> flipPattern(pattern) }
+            .map { it.input to it }
+            .associate { it }
 
         private fun flipPattern(pattern: Pattern): Sequence<Pattern> {
             val flipV = flipVertically(pattern.input)
             val flipH = flipHorizontally(pattern.input)
             val flipBoth = flipHorizontally(flipV)
             val flipD = flipDiagonally(pattern.input)
-            return sequenceOf(pattern,
-                    pattern.copy(input = flipV),
-                    pattern.copy(input = flipH),
-                    pattern.copy(input = flipD),
-                    pattern.copy(input = flipHorizontally(flipD)),
-                    pattern.copy(input = flipVertically(flipD)),
-                    pattern.copy(input = flipBoth),
-                    pattern.copy(input = flipDiagonally(flipBoth))
+            return sequenceOf(
+                pattern,
+                pattern.copy(input = flipV),
+                pattern.copy(input = flipH),
+                pattern.copy(input = flipD),
+                pattern.copy(input = flipHorizontally(flipD)),
+                pattern.copy(input = flipVertically(flipD)),
+                pattern.copy(input = flipBoth),
+                pattern.copy(input = flipDiagonally(flipBoth))
             )
         }
 
@@ -82,10 +83,10 @@ class FractalGenerator(input: List<String>) {
         fun flipDiagonally(input: String): String {
             val rows = input.split("/").map { it.toCharArray() }
             return Array(rows.size) { i -> CharArray(rows.size) { j -> rows[j][i] } }
-                    .joinToString("/") { it.joinToString("") }
+                .joinToString("/") { it.joinToString("") }
         }
     }
 
-    fun sumActivePixels(): Int = pixels.sumBy { it.count { it } }
+    fun sumActivePixels(): Int = pixels.sumOf { it.count { it } }
 
 }

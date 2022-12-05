@@ -146,7 +146,7 @@ class JigsawSolver(input: List<String>) {
     fun computeRoughness(): Int {
         val map = countSeaMonsters().first
         map.forEachIndexed { index, str -> println("$index : $str") }
-        return map.sumBy { row -> row.count { it == '#' } }
+        return map.sumOf { row -> row.count { it == '#' } }
     }
 
     data class Match(

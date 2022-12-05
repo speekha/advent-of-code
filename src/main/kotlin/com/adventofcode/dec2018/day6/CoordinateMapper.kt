@@ -1,8 +1,6 @@
 package com.adventofcode.dec2018.day6
 
-import com.adventofcode.dec2018.day4.GuardStatistics
 import java.io.File
-import java.util.*
 
 class CoordinateMapper(input: List<String>) {
 
@@ -16,8 +14,6 @@ class CoordinateMapper(input: List<String>) {
 
     val yMin: Int = points.minByOrNull { it.y }?.y ?: 0
     val yMax: Int = points.maxByOrNull { it.y }?.y ?: Integer.MAX_VALUE
-
-    data class Plot(val distance: Int, val center: Int)
 
     fun findLargestFiniteArea(): Int {
         val plot = Array(xMax - xMin + 1) { x ->
@@ -37,14 +33,14 @@ class CoordinateMapper(input: List<String>) {
             eligible.remove(findClosestTo(Position(xMax + 1, y)))
         }
 
-        return eligible.map { center ->
-            plot.sumBy { it.count { it == center } }
-        }.maxOrNull() ?: 0
+        return eligible.maxOfOrNull { center ->
+            plot.sumOf { x -> x.count { y -> y == center } }
+        } ?: 0
     }
 
     private fun findClosestTo(position: Position): Int {
         val groups = points.indices.groupBy { points[it] - position }
-        val minKey = groups.minByOrNull { it -> it.key } ?: error("No min")
+        val minKey = groups.minByOrNull { it.key } ?: error("No min")
         return if (minKey.value.size == 1) {
             minKey.value[0]
         } else {
@@ -61,11 +57,11 @@ class CoordinateMapper(input: List<String>) {
     fun findLargestSafeArea(threshold: Int): Int {
         val plot = Array(xMax - xMin + 1) { x ->
             Array(yMax - yMin + 1) { y ->
-                points.sumBy { it - Position(x, y) }
+                points.sumOf { it - Position(x, y) }
             }
         }
 
-        return plot.sumBy { it.count { it < threshold } }
+        return plot.sumOf { x -> x.count { y -> y < threshold } }
     }
 
 }

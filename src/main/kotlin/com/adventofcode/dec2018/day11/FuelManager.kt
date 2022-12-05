@@ -27,7 +27,7 @@ class FuelManager(val serialNumber: Int) {
     private fun sumGrid(windowSize: Int): List<List<Int>> {
         val sumX = powerCells.map { it.toList().windowed(windowSize) { list -> list.sum() } }
         return sumX.windowed(windowSize) { range ->
-            range[0].indices.map { i -> range.sumBy { it[i] } }
+            range[0].indices.map { i -> range.sumOf { it[i] } }
         }
     }
 

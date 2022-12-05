@@ -25,7 +25,7 @@ class BagProcessor(input: List<String>) {
 
     fun findContent(color: String): Int {
         val rule = containerRules[color]?.content ?: error("Data error")
-        return 1 + rule.sumBy { (count, color) ->
+        return 1 + rule.sumOf { (count, color) ->
             count * findContent(color)
         }
     }

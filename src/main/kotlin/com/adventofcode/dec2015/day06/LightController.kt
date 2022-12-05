@@ -29,7 +29,7 @@ class LightController(
         return (xmin..xmax) to (ymin..ymax)
     }
 
-    fun measureLuminosity(): Int = lightBulbs.sumBy { it.sum() }
+    fun measureLuminosity(): Int = lightBulbs.sumOf { it.sum() }
 
     enum class Action(val label: String) {
         TURN_ON("turn on"), TURN_OFF("turn off"), TOGGLE("toggle")

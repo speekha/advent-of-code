@@ -8,7 +8,7 @@ class CaptchaBreaker {
 
     private fun addPairs(input: String, offset: Int) = input.toCharArray()
             .map { it - '0' }.run {
-        indices.filter { this[it] == this[(it + offset) % this.size] }
-                .sumBy { this[it] }
-    }
+            indices.filter { this[it] == this[(it + offset) % this.size] }
+                .sumOf { this[it] }
+        }
 }

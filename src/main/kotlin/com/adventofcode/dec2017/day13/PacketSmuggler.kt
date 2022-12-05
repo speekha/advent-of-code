@@ -1,9 +1,5 @@
 package com.adventofcode.dec2017.day13
 
-import com.adventofcode.time
-import java.io.File
-import kotlin.system.measureTimeMillis
-
 class PacketSmuggler(input: List<String>) {
 
     private val layers = analyseFirewall(input)
@@ -23,7 +19,7 @@ class PacketSmuggler(input: List<String>) {
 
     fun traverse(delay: Int = 0): List<Int> = layers.keys.filter { isScannerAtTop(it, it + delay) }
 
-    fun computeSeverity(delay: Int = 0) = traverse(delay).sumBy { it * getRange(it) }
+    fun computeSeverity(delay: Int = 0) = traverse(delay).sumOf { it * getRange(it) }
 
     fun avoidScanners(): Int {
         var i = 0

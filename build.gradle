@@ -2,8 +2,8 @@ group 'speekha'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.6.0'
-    ext.junit_version = '5.8.1'
+    ext.kotlin_version = '1.7.20'
+    ext.junit_version = '5.9.1'
 
     repositories {
         mavenCentral()

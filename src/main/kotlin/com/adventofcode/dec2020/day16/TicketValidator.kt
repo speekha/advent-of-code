@@ -30,7 +30,7 @@ class TicketValidator(input: List<String>) {
     }
 
     data class Ticket(val fields: List<Int>) {
-        fun sumInvalidFields(rules: List<Field>) = fields.sumBy {
+        fun sumInvalidFields(rules: List<Field>) = fields.sumOf {
             it.takeIf { field -> rules.none { field in it } } ?: 0
         }
 
@@ -41,7 +41,7 @@ class TicketValidator(input: List<String>) {
     private fun parseTicket(input: String) =
         Ticket(input.split(",").map { it.toInt() })
 
-    fun computeErrorRate(): Int = nearbyTickets.sumBy {
+    fun computeErrorRate(): Int = nearbyTickets.sumOf {
         it.sumInvalidFields(fieldRules)
     }
 

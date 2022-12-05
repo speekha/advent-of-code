@@ -17,7 +17,7 @@ class LicenceReader(input: String) {
     fun sumMetadata() = sumMetaData(root)
 
     private fun sumMetaData(node: Node): Int {
-        return node.metadata.sum() + node.children.sumBy { sumMetaData(it) }
+        return node.metadata.sum() + node.children.sumOf { sumMetaData(it) }
     }
 
     private fun readNode(numbers: LinkedList<Int>): Node {

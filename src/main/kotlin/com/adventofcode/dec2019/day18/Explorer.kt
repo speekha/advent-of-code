@@ -35,11 +35,19 @@ class Explorer(
                     tracker[neighbor] = true
                     when (val cell = map[neighbor]) {
                         Cell.Entrance, Cell.Empty -> queue.add(neighbor to Link(link.distance + 1, link.doors))
-                        is Cell.Door -> queue.add(neighbor to Link(link.distance + 1, link.doors + cell.name.toLowerCase()))
+                        is Cell.Door -> queue.add(
+                            neighbor to Link(
+                                link.distance + 1,
+                                link.doors + cell.name.lowercaseChar()
+                            )
+                        )
+
                         is Cell.Key -> {
                             targets[cell.name] = Link(link.distance + 1, link.doors)
                             queue.add(neighbor to Link(link.distance + 1, link.doors))
                         }
+
+                        else -> {}
                     }
                 }
             }

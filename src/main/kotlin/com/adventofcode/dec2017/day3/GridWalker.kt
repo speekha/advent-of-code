@@ -17,7 +17,7 @@ class GridWalker {
 
     fun computeNextCellValue(): Int {
         val pos: Position = getNextPosition()
-        val value = adjacentPositions.sumBy { memory[pos + it] ?: 0 }
+        val value = adjacentPositions.sumOf { memory[pos + it] ?: 0 }
         memory[pos] = value
         return value
     }

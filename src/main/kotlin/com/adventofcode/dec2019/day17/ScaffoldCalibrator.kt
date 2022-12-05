@@ -4,21 +4,19 @@ import com.adventofcode.debug
 import com.adventofcode.positioning.Direction
 import com.adventofcode.positioning.Position
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.receiveOrNull
-import java.lang.StringBuilder
 
 class ScaffoldCalibrator(
-        private val camera: Channel<Long>,
-        private val control: Channel<Char>
+    private val camera: Channel<Long>,
+    private val control: Channel<Char>
 ) {
 
     var scaffoldState: List<String> = listOf()
 
     fun computeAlignmentParameters(): Int = scaffoldState.indices.flatMap { y ->
         scaffoldState[y].indices
-                .map { x -> Position(x, y) }
-                .filter { pos -> isIntersection(pos) }
-    }.sumBy { it.x * it.y }
+            .map { x -> Position(x, y) }
+            .filter { pos -> isIntersection(pos) }
+    }.sumOf { it.x * it.y }
 
     private fun isIntersection(pos: Position): Boolean = pos.x > 0
             && pos.x < scaffoldState[pos.y].length - 1
@@ -77,9 +75,9 @@ class ScaffoldCalibrator(
 
     private fun combineTokens(possibleA: List<String>, possibleB: List<String>, full: String): List<String> {
         val options = mutableListOf<List<String>>()
-        var a = ""
-        var b = ""
-        var c = ""
+        var a: String
+        var b: String
+        var c: String
         loops@ for (iA in possibleA) {
             for (iB in possibleB) {
                 val iC = extractC(full, iA, iB)
@@ -87,7 +85,7 @@ class ScaffoldCalibrator(
                     a = iA
                     b = iB
                     c = iC
-                    val main = full.replace(a, "A").replace(b!!, "B").replace(c, "C")
+                    val main = full.replace(a, "A").replace(b, "B").replace(c, "C")
                     options += listOf(main, a, b, c)
                 }
             }
@@ -125,7 +123,7 @@ class ScaffoldCalibrator(
         val commands = mutableListOf<String>()
         val position = findRobot()
         val initDirection = getRobotOrientation(position)
-        val (direction, turns) = orientateRobot(position, initDirection, commands)
+        val (direction, turns) = orientateRobot(position, initDirection)
         commands += getTurns(turns)
         commands += followScaffolding(position, direction)
         return commands.chunked(2).map { "${it[0]},${it[1]}" }
@@ -133,8 +131,10 @@ class ScaffoldCalibrator(
 
     private fun findRobot(): Position {
         return scaffoldState.mapIndexed { y, row ->
-            Position("[<>^v]".toRegex().find(row)?.range?.first
-                    ?: -1, y)
+            Position(
+                "[<>^v]".toRegex().find(row)?.range?.first
+                    ?: -1, y
+            )
         }.first { it.x != -1 }
     }
 
@@ -148,7 +148,10 @@ class ScaffoldCalibrator(
         }
     }
 
-    private fun orientateRobot(position: Position, direction: Direction, commands: MutableList<String>): Pair<Direction, Int> {
+    private fun orientateRobot(
+        position: Position,
+        direction: Direction
+    ): Pair<Direction, Int> {
         var direction1 = direction
         var turns = 0
         while (getCell(position + direction1) != '#') {
@@ -182,10 +185,12 @@ class ScaffoldCalibrator(
                     commands += "R"
                     direction++
                 }
+
                 getCell(position + (direction - 1)) == '#' -> {
                     commands += "L"
                     direction--
                 }
+
                 else -> return commands
             }
         }

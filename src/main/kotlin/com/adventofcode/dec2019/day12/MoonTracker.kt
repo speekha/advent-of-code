@@ -25,7 +25,7 @@ class MoonTracker(input: List<String>) {
     }
 
     fun computeTotalEnergy(): Int {
-        return moons.sumBy { computeEneergy(it) }
+        return moons.sumOf { computeEneergy(it) }
     }
 
     private fun computeEneergy(moon: Moon): Int {
@@ -56,7 +56,7 @@ class MoonTracker(input: List<String>) {
     }
 
     fun Moon.iterate(pos: KProperty1<Moon, Int>, velocity: KProperty1<Moon, Int>): Pair<Int, Int> {
-        val delta = velocity(this) + moons.sumBy { pos.get(it).compareTo(pos.get(this)) }
+        val delta = velocity(this) + moons.sumOf { pos.get(it).compareTo(pos.get(this)) }
         return (pos.get(this) + delta) to delta
     }
 

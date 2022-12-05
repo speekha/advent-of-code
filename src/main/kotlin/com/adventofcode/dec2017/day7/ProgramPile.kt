@@ -43,22 +43,22 @@ class ProgramPile(input: List<String> = emptyList()) {
 
     fun Node.areChildrenBalanced() = children.groupBy { node(it).totalWeight() }.size == 1
 
-    fun Node.addChildrenWeights() = children.sumBy { node(it).totalWeight() }
+    fun Node.addChildrenWeights() = children.sumOf { node(it).totalWeight() }
 
     fun getChildrenWeight(node: String) = node(node).addChildrenWeights()
 
     fun Node?.totalWeight(): Int = when {
         this == null -> 0
         totalWeight != 0 -> totalWeight
-        else -> (weight + children.sumBy { node(it).totalWeight() }).also { totalWeight = it }
+        else -> (weight + children.sumOf { node(it).totalWeight() }).also { totalWeight = it }
     }
 
     fun getTotalWeight(node: String) = node(node).totalWeight()
 
     fun buildTree(input: List<String>) = parseInputs(input)
-            .flatMap { parent ->
-                parent.children.map { it to parent.name }
-            }.toMap()
+        .flatMap { parent ->
+            parent.children.map { it to parent.name }
+        }.toMap()
 
     fun parseInputs(input: List<String>) = input.map { parseInputLine(it) }
 
@@ -71,9 +71,9 @@ class ProgramPile(input: List<String> = emptyList()) {
     }
 
     data class Node(
-            val name: String,
-            val weight: Int,
-            val children: List<String>
+        val name: String,
+        val weight: Int,
+        val children: List<String>
     ) {
         var totalWeight: Int = 0
     }

@@ -20,7 +20,7 @@ class FabricMapper(input: List<String>) {
     }
 
     val overlap: Int
-        get() = map.sumBy { it.count { it > 1 } }
+        get() = map.sumOf { it.count { it > 1 } }
 
 
     private fun mapClaims(input: List<String>): List<Claim> {

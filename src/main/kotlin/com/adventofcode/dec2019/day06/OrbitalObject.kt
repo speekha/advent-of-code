@@ -4,7 +4,7 @@ class OrbitalObject(
         val name: String
 ) {
 
-    fun countOrbits(depth: Int = 0): Int = children.sumBy { it.countOrbits(depth + 1) } + depth
+    fun countOrbits(depth: Int = 0): Int = children.sumOf { it.countOrbits(depth + 1) } + depth
 
     var parent: OrbitalObject? = null
 

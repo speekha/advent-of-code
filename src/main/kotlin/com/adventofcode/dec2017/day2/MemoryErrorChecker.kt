@@ -11,7 +11,7 @@ class MemoryErrorChecker {
 
     fun calculateArrayChecksum(input: String): Int {
         val rows = input.split("\n")
-        return rows.sumBy { calculateRowChecksum(it) }
+        return rows.sumOf { calculateRowChecksum(it) }
     }
 
     fun calculateRowDivisionChecksum(input: String): Int {
@@ -26,7 +26,7 @@ class MemoryErrorChecker {
 
     fun calculateArrayDivisionChecksum(input: String): Int {
         val rows = input.split("\n")
-        return rows.sumBy { calculateRowDivisionChecksum(it) }
+        return rows.sumOf { calculateRowDivisionChecksum(it) }
     }
 }
 
