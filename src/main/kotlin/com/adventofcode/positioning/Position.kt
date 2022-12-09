@@ -1,5 +1,6 @@
 package com.adventofcode.positioning
 
+import javax.print.attribute.standard.MediaSize.Other
 import kotlin.math.abs
 
 data class Position(val x: Int, val y: Int) {
@@ -13,4 +14,6 @@ data class Position(val x: Int, val y: Int) {
     operator fun times(value: Int) = Position(x * value, y * value)
 
     fun distance() = abs(x) + abs(y)
+
+    operator fun minus(other: Position): Position = Position(x - other.x, y - other.y)
 }
