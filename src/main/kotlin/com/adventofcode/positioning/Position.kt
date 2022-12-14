@@ -17,3 +17,9 @@ data class Position(val x: Int, val y: Int) {
 
     operator fun minus(other: Position): Position = Position(x - other.x, y - other.y)
 }
+
+operator fun <T> Array<Array<T>>.get(position: Position) = this[position.y][position.x]
+
+operator fun <T> Array<Array<T>>.set(position: Position, value: T) {
+    this[position.y][position.x] = value
+}
