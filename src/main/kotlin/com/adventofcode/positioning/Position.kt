@@ -15,6 +15,8 @@ data class Position(val x: Int, val y: Int) {
 
     fun distance() = abs(x) + abs(y)
 
+    fun distance(destination: Position) = (this - destination).distance()
+
     operator fun minus(other: Position): Position = Position(x - other.x, y - other.y)
 }
 
