@@ -2,6 +2,7 @@ package com.adventofcode
 
 import java.io.File
 import java.security.MessageDigest
+import java.util.*
 import kotlin.system.measureTimeMillis
 
 fun time(block: () -> Unit) {
@@ -45,3 +46,13 @@ inline operator fun <reified T> T.plus(i: Int): T where T : Enum<T> =
     enumValues<T>()[(ordinal + i) % enumValues<T>().count()]
 
 inline operator fun <reified T> T.inc(): T where T : Enum<T> = this + 1
+
+fun <T : Any> processQueue(initial: Iterable<T>, computeNext: (T) -> List<T>) {
+    val queue = LinkedList<T>()
+    queue.addAll(initial)
+    while (queue.isNotEmpty()) {
+        val current = queue.pollFirst()
+        queue.addAll(computeNext(current))
+    }
+
+}
