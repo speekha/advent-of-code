@@ -40,3 +40,8 @@ fun lcm(a: Long, b: Long): Long = a / gcd(a, b) * b
 fun lcm(vararg numbers: Long) = numbers.reduce { acc, number ->
     lcm(acc, number)
 }
+
+inline operator fun <reified T> T.plus(i: Int): T where T : Enum<T> =
+    enumValues<T>()[(ordinal + i) % enumValues<T>().count()]
+
+inline operator fun <reified T> T.inc(): T where T : Enum<T> = this + 1

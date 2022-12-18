@@ -22,6 +22,12 @@ data class Position(val x: Int, val y: Int) {
 
 operator fun <T> Array<Array<T>>.get(position: Position) = this[position.y][position.x]
 
+operator fun <T> List<Array<T>>.get(position: Position) = this[position.y][position.x]
+
 operator fun <T> Array<Array<T>>.set(position: Position, value: T) {
+    this[position.y][position.x] = value
+}
+
+operator fun <T> List<Array<T>>.set(position: Position, value: T) {
     this[position.y][position.x] = value
 }
