@@ -47,11 +47,23 @@ inline operator fun <reified T> T.plus(i: Int): T where T : Enum<T> =
 
 inline operator fun <reified T> T.inc(): T where T : Enum<T> = this + 1
 
+fun <T : Any> processQueue(initial: T, computeNext: (T) -> List<T>) = processQueue(listOf(initial), computeNext)
 fun <T : Any> processQueue(initial: Iterable<T>, computeNext: (T) -> List<T>) {
     val queue = LinkedList<T>()
     queue.addAll(initial)
     while (queue.isNotEmpty()) {
-        val current = queue.pollFirst()
+        val current = queue.poll()
+        queue.addAll(computeNext(current))
+    }
+}
+
+fun <T : Comparable<T>> processPrioritizedQueue(initial: T, computeNext: (T) -> List<T>) = processPrioritizedQueue(listOf(initial), computeNext)
+
+fun <T : Comparable<T>> processPrioritizedQueue(initial: Iterable<T>, computeNext: (T) -> List<T>) {
+    val queue = PriorityQueue<T>()
+    queue.addAll(initial)
+    while (queue.isNotEmpty()) {
+        val current = queue.poll()
         queue.addAll(computeNext(current))
     }
 

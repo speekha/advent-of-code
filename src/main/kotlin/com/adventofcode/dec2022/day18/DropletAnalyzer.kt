@@ -27,7 +27,7 @@ class DropletAnalyzer {
     private fun countInsideFacets(cubes: Set<Coordinates>, exposedFacets: Set<Coordinates>): Int {
         val outside = outsideLayer(exposedFacets, cubes).toMutableSet()
         val remaining = exposedFacets.filter { it !in outside }.toMutableSet()
-        processQueue(outside) { current ->
+        processQueue<Coordinates>(outside) { current ->
             current.filterNeighbors { it !in outside && it in exposedFacets }.onEach {
                 outside += it
                 remaining -= it
