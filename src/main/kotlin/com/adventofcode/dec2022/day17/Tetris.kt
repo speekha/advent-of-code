@@ -12,8 +12,7 @@ class Tetris(
 ) {
 
 
-    var height: Int = 0
-        private set
+    private var height: Int = 0
 
     private var rock = Shapes.A
 
@@ -21,11 +20,46 @@ class Tetris(
 
     private val chamber = LinkedList<Array<Boolean>>()
 
+    fun dropRocks(steps: Long): Long {
+        primeChamber(steps)
+        return if (steps <= 500) {
+            height.toLong()
+        } else {
+            computeHeightWithCycle(steps)
+        }
+    }
+
+    private fun primeChamber(steps: Long) {
+        repeat(steps.coerceAtMost(500).toInt()) {
+            dropRock()
+        }
+    }
+
+    private fun computeHeightWithCycle(steps: Long) : Long {
+        val cache = mutableMapOf<Pair<Int, Int>, Pair<Long, Int>>()
+        for (i in 501L..steps) {
+            val key = currentJet to rock.ordinal
+            val previous = cache[key]
+            dropRock()
+            if (previous == null) {
+                cache[key] = i to height
+            } else {
+                val cycle = i - previous.first
+                val remaining = (steps - i) % cycle
+                if (remaining == 0L) {
+                    val heightDifference = height - previous.second
+                    return height + ((steps - i) / cycle) * heightDifference
+                }
+            }
+        }
+        return height.toLong()
+    }
+
     fun dropRock() {
         while (chamber.size < height + 3 + rock.height) {
             chamber.addFirst(Array(7) { true })
         }
-        var position = Position(2, 0)
+        var position = Position(2, chamber.size - height - 3 - rock.height)
         var movingDown = true
         do {
             position = moveLaterally(position)
@@ -37,7 +71,7 @@ class Tetris(
         rock.blocks.forEach {
             chamber[position + it] = false
         }
-        height = chamber.size - position.y
+        height = chamber.size - chamber.indexOfFirst { row -> row.any { !it } }
         rock++
     }
 
@@ -67,9 +101,15 @@ class Tetris(
         }
     }
 
-    fun print() {
-        chamber.forEach { row ->
-            println(row.joinToString(separator = "", prefix = "[", postfix = "]") { if (it) " " else "#" })
+    fun print(rock: Shapes? = null, position: Position = Position(0, 0)) {
+        chamber.forEachIndexed { y, row ->
+            println(row.withIndex().joinToString(separator = "", prefix = "[", postfix = "]") { (x, it) ->
+                when {
+                    rock != null && rock.blocks.any { it + position == Position(x, y) } -> "o"
+                    it -> " "
+                    else -> "#"
+                }
+            })
         }
         println()
     }
