@@ -71,4 +71,17 @@ class FlowOptimizerTest {
         val result = FlowOptimizer(valves).optimize( 30)
         assertEquals(1820, result)
     }
+
+    @Test
+    fun `should release most pressure for 30 minutes with elephant's help`() {
+        val valves = input.map { Valve(it) }
+        assertEquals(1707, FlowOptimizer(valves).optimize(2, 26))
+    }
+
+    @Test
+    @Ignore("Doesn't work yet")
+    fun `should release most pressure for 30 minutes with actual elephant's help`() {
+        val valves = actualInputList.map { Valve(it) }
+        assertEquals(1707, FlowOptimizer(valves).optimize(2, 26))
+    }
 }

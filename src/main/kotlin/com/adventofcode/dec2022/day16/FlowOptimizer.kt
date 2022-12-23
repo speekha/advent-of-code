@@ -37,7 +37,7 @@ class FlowOptimizer(
     fun distance(a: String, b: String) = distances[a]?.get(b) ?: Integer.MAX_VALUE
 
     fun optimize(minutes: Int): Int {
-        val start = FlowConfiguration(valves["AA"] ?: error("Missing starting point"), emptyList(), timeLeft = minutes)
+        val start = FlowConfiguration(listOf(valves["AA"] ?: error("Missing starting point")), emptyList(), timeLeft = listOf(minutes))
         var max = 0
         val tested = mutableMapOf<String, FlowConfiguration>()
         val testable = valves.values.filter { it.flow > 0 }.asSequence()
@@ -45,15 +45,15 @@ class FlowOptimizer(
         processor.process { conf ->
             val nextConf = testable
                 .filter { it !in conf.openedValves }
-                .map { it to distance(conf.position.name, it.name) }
-                .filter { (_, d) -> d < conf.timeLeft }
+                .map { it to distance(conf.positions[0].name, it.name) }
+                .filter { (_, d) -> d < conf.timeLeft[0] }
                 .map { (valve, distance) ->
-                    val remaining = conf.timeLeft - distance - 1
+                    val remaining = conf.timeLeft[0] - distance - 1
                     FlowConfiguration(
-                        valve,
+                        listOf(valve),
                         conf.openedValves + valve,
                         conf.pressureReleased + valve.flow * remaining,
-                        remaining
+                        listOf(remaining)
                     )
                 }.toMutableList()
             if (nextConf.isEmpty()) {
@@ -75,29 +75,31 @@ class FlowOptimizer(
         return max
     }
 
-    fun optimizeWithElephant(minutes: Int): Int {
-        val start = FlowConfiguration(valves["AA"] ?: error("Missing starting point"), emptyList(), timeLeft = minutes)
+    fun optimize(participants: Int, minutes: Int): Int {
+        val startValve = valves["AA"] ?: error("Missing starting point")
+        val start = FlowConfiguration((1..participants).map { startValve }, emptyList(), timeLeft = (1..participants).map { minutes })
         var max = 0
         val tested = mutableMapOf<String, FlowConfiguration>()
         val testable = valves.values.filter { it.flow > 0 }.asSequence()
         val processor = PrioritizedQueueProcessor(start)
         processor.process { conf ->
-            val nextConf = testable
+            val nextConf = mutableListOf<FlowConfiguration>()
+            testable
                 .filter { it !in conf.openedValves }
-                .map { it to distance(conf.position.name, it.name) }
-                .filter { (_, d) -> d < conf.timeLeft }
-                .map { (valve, distance) ->
-                    val remaining = conf.timeLeft - distance - 1
+                .map { findClosestToValve(it, conf)}
+                .filter { (_,_, d) -> d > 0 }
+                .map { (valve, i, remaining) ->
                     FlowConfiguration(
-                        valve,
+                        conf.positions.indices.map { if (it == i) valve else conf.positions[it] },
                         conf.openedValves + valve,
                         conf.pressureReleased + valve.flow * remaining,
-                        remaining
+                        conf.timeLeft.indices.map { if (it == i) remaining else conf.timeLeft[it] },
                     )
-                }.toMutableList()
+                }.forEach { nextConf.add(it) }
             if (nextConf.isEmpty()) {
                 if (conf.pressureReleased > max) {
                     max = conf.pressureReleased
+                    println("New max: $max (queue size : ${processor.queue.size})")
                 }
             } else {
                 val alreadyTested = nextConf.filter { it.key() in tested }
@@ -112,5 +114,18 @@ class FlowOptimizer(
             nextConf.sortedByDescending { it.pressureReleased }
         }
         return max
+    }
+
+    fun findClosestToValve(valve: Valve, conf: FlowConfiguration) : Triple<Valve, Int, Int> {
+        var closest = 0
+        var maxRemaining = 0
+        conf.positions.indices.forEach {i ->
+            val dist = conf.timeLeft[i] - distance(valve.name, conf.positions[i].name) - 1
+            if (maxRemaining < dist) {
+                maxRemaining = dist
+                closest = i
+            }
+        }
+        return Triple(valve, closest, maxRemaining)
     }
 }
