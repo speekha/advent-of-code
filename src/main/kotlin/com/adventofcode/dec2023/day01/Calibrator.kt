@@ -18,21 +18,30 @@ class Calibrator {
         var i = 0
         while (i < input.length) {
             if (input[i] in '0'..'9') {
-                if (digit1 == -1) {
-                    digit1 = input[i].digitToInt()
-                }
-                digit2 = input[i].digitToInt()
-                i++
+                digit1 = input[i].digitToInt()
+                break
             } else {
                 val digit = digitStrings.firstOrNull { input.drop(i).startsWith(it) }
                 if (digit != null) {
-                    if (digit1 == -1) {
-                        digit1 = digitStrings.indexOf(digit)
-                    }
-                    digit2 = digitStrings.indexOf(digit)
-                    i += digit.length
+                    digit1 = digitStrings.indexOf(digit)
+                    break
                 } else {
                     i++
+                }
+            }
+        }
+        i = input.length - 1
+        while (i >= 0) {
+            if (input[i] in '0'..'9') {
+                digit2 = input[i].digitToInt()
+                break
+            } else {
+                val digit = digitStrings.firstOrNull { input.drop(i).startsWith(it) }
+                if (digit != null) {
+                    digit2 = digitStrings.indexOf(digit)
+                    break
+                } else {
+                    i--
                 }
             }
         }

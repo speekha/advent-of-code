@@ -45,6 +45,6 @@ class CalibrationTest {
     fun `should compute actual corrected calibration value`() {
         val calibrator = Calibrator()
         // > 53846
-        assertEquals(1, calibrator.advancedCalibration(actualInputList))
+        assertEquals(53855, calibrator.advancedCalibration(actualInputList))
     }
 }
