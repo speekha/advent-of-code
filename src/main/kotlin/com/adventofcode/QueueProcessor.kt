@@ -2,7 +2,7 @@ package com.adventofcode
 
 import java.util.*
 
-abstract class QueueProcessor<T : Any>() {
+abstract class QueueProcessor<T : Any> {
 
     abstract val queue: Queue<T>
 
