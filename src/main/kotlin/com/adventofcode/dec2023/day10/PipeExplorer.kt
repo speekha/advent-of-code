@@ -104,9 +104,26 @@ class PipeExplorer(val map: List<String>) {
     }
 
     private fun isLeftOut(tiles: Array<Array<Tile>>): Boolean {
-        val queue = LinkedList(tiles.indices.flatMap { y ->
-            tiles[y].indices.map { x -> Position(x, y) }.filter { tiles[it] == Tile.LEFT }
-        })
+        val queue = initQueue(tiles, Tile.LEFT)
+        try {
+            processUnknownTiles(queue, tiles, true)
+        } catch (e: java.lang.IndexOutOfBoundsException) {
+            return true
+        }
+        return false
+    }
+
+    private fun fillRest(tiles: Array<Array<Tile>>, value: Tile) {
+        val queue = initQueue(tiles, value)
+        queue.forEach { tiles[it] = Tile.IN }
+        processUnknownTiles(queue, tiles, false)
+    }
+
+    private fun initQueue(tiles: Array<Array<Tile>>, value: Tile) = LinkedList(tiles.indices.flatMap { y ->
+        tiles[y].indices.asSequence().map { x -> Position(x, y) }.filter { (tiles[it] == value) }
+    })
+
+    private fun processUnknownTiles(queue: LinkedList<Position>, tiles: Array<Array<Tile>>, checkBounds: Boolean) {
         while (queue.isNotEmpty()) {
             val current = queue.pollFirst()
             val neighbors = Direction.values().map { current + it }
@@ -117,35 +134,13 @@ class PipeExplorer(val map: List<String>) {
                         queue.add(neighbor)
                     }
 
-                    Tile.OUT -> return true
-                    else -> {}
-                }
-            }
-        }
-        return false
-    }
-
-    private fun fillRest(tiles: Array<Array<Tile>>, value: Tile) {
-        val start = tiles.indices.flatMap { y ->
-            tiles[y].indices.asSequence().map { x -> Position(x, y) }.filter { (tiles[it] == value) }
-        }
-        val queue = LinkedList(start)
-        while (queue.isNotEmpty()) {
-            val current = queue.pollFirst()
-            tiles[current] = Tile.IN
-            val neighbors = Direction.values().map { current + it }
-            neighbors.forEach { neighbor ->
-                when (tiles[neighbor]) {
-                    Tile.UNKNOWN -> {
-                        tiles[neighbor] == tiles[current]
-                        queue.add(neighbor)
-                    }
-
+                    Tile.OUT -> if (checkBounds) throw IndexOutOfBoundsException()
                     else -> {}
                 }
             }
         }
     }
+
 
     private operator fun Array<Array<Tile>>.get(position: Position): Tile = if (position.y in indices && position.x in this[position.y].indices) {
         this[position.y][position.x]
