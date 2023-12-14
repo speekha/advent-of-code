@@ -43,6 +43,8 @@ enum class CardinalDirection(override val x: Int, override val y: Int) : Orienta
 
     operator fun dec() = turnLeft()
 
+    operator fun unaryMinus() = values()[(ordinal + 2) % values().size]
+
     fun turnRight(): CardinalDirection = values()[(ordinal + 1) % values().size]
 
     fun turnLeft(): CardinalDirection = values()[(values().size + ordinal - 1) % values().size]
